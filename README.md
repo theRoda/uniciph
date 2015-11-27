@@ -3,7 +3,7 @@ Universal Cipher Bruteforce Tool
 #### warning: project still in alpha.. goofy stuff lies yonder
 Credit to http://inventwithpython.com/hacking for the inspiration and currently a bulk of the code in the support modules.
 <br><br>
-*usage: python2 uniciph.py <cipherfile>*
+*usage: python2 uniciph.py < cipherfile >*
 <br><br>
 * working:
   * base64
