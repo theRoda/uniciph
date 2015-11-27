@@ -1,3 +1,5 @@
+#/bin/bash/python
+# -*- coding: utf-8 -*-
 # Cryptomath Module
 # http://inventwithpython.com/hacking (BSD Licensed)
 
