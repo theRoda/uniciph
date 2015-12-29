@@ -34,5 +34,6 @@ Credit to http://inventwithpython.com/hacking for the inspiration and currently 
   * Chi test
   * take key(s) as argument
   * take key(s) file as argument
+  * parallelize
 <br><br>
 note: When using newDetectEnglish(), the default is to require 60% words and 75% letters to return a match. I am still trying to find the best ratio for each. These values can be tweaked in the isEnglish() function, or when calling isEnglish() eg. `isEnglish(cleartext, 50, 80)` would require 50% words and 80% letters.
