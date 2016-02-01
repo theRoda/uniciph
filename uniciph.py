@@ -57,7 +57,7 @@ def testCaesar(ciphertext):
 			c = ord(c)
 			decoded += chr(c + testkey if c + testkey < 90 else c - testkey)
 		print('{0} : Rot{1} Caesar').format(decoded, str(testkey))
-		checkMatch(decoded, testkey, 'Ceasar')
+		checkMatch(decoded, testkey, 'Caesar')
 	
 def testTrans(self):
 	key = 1
