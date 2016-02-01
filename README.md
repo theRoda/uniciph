@@ -9,13 +9,12 @@ Credit to http://inventwithpython.com/hacking for the inspiration and currently 
   * base64
   * reverse
   * atbash
-  * caesar (mostly)
+  * caesar
   * hex (mostly)
 * fixing: 
   * baconian
   * affine
   * transposition
-  * caesar edge cases
   * hex case '0x'
 2. next: 
   * XOR
