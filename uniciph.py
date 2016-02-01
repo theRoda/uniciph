@@ -47,27 +47,18 @@ def testReverse(self):
 	print(decoded + ' : Reverse')
 	checkMatch(decoded, None, 'Reverse')	
 	
-def testCaesar(self):
-	ABC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-	self = self.upper()
-	key = 1
-	while key < 26:
+def testCaesar(ciphertext):
+	for testkey in range(0,25):
 		decoded = ''
-		for c in self:
-			if c in ABC:
-				num = ABC.find(c)
-				num = num + key
-				if num >= len(ABC):
-					num = num - len(ABC)
-				elif num < 0:
-					num = num + len(ABC)
-				decoded = decoded + ABC[num]
-			else:
-				decoded = decoded + c
-		print('{0} : Rot{1} Caesar').format(decoded.strip(), str(key))
-		checkMatch(decoded, key, 'Casesar')
-		key += 1
-		
+		for c in ciphertext.upper():
+			if not c.isalpha():
+				decoded += c
+				continue
+			c = ord(c)
+			decoded += chr(c + testkey if (c + testkey) < 90 else c - testkey)
+		print('{0} : Rot{1} Caesar').format(decoded, str(testkey))
+		checkMatch(decoded, testkey, 'Ceasar')
+	
 def testTrans(self):
 	key = 1
 	self = self.strip()
