@@ -10,12 +10,11 @@ Credit to http://inventwithpython.com/hacking for the inspiration and currently 
   * reverse
   * atbash
   * caesar
-  * hex (mostly)
+  * hex
 * fixing: 
   * baconian
   * affine
   * transposition
-  * hex case '0x'
 2. next: 
   * XOR
   * railfence
