@@ -13,6 +13,7 @@ import sys
 import math
 import string
 import base64
+import binascii
 import newDetectEnglish
 import cryptomath
 import affineCipher
@@ -31,14 +32,14 @@ def checkMatch(message, key, cipher):
 		sys.exit()
 	else:
 		pass
-		
-def testBase64(self):
+
+def testBase64(ciphertext):
 	try:
-		decoded = base64.b64decode(self)
-	except:
-		decoded = 'aaaaaa' # hacky fix for checkMatch reference before assignment when try fails. needs work
-	checkMatch(decoded, None, 'Base64')
-		
+		decoded = base64.decodestring(ciphertext)
+		checkMatch(decoded, None, 'Base64')
+	except binascii.Error:
+		print('Testing Base64: Not Base64')
+
 def testReverse(self):
 	decoded = ''
 	i = len(self) - 1
