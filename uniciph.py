@@ -11,6 +11,7 @@
 import re
 import sys
 import math
+import string
 import base64
 import newDetectEnglish
 import cryptomath
@@ -26,7 +27,7 @@ def checkMatch(message, key, cipher):
 	message = message.strip()
 	if newDetectEnglish.isEnglish(message):
 		print(herpderp)
-		print('[!]'+message+' : '+cipher+' : Key:'+str(key))
+		print('[!] {0} : {1} : Key:{2}'.format(message, cipher, key))
 		sys.exit()
 	else:
 		pass
@@ -45,23 +46,19 @@ def testReverse(self):
 		decoded = decoded + self[i]
 		i -= 1
 	print(decoded + ' : Reverse')
-	checkMatch(decoded, None, 'Reverse')
-	
-def decodeCaesar(key, character):
-	if not character.isalpha():
-		return(character)
-	position = ord(character)
-	if position + key < 90:
-		position += key
-	else:
-		position -= key
-	return(chr(position))
+	checkMatch(decoded, None, 'Reverse')	
 	
 def testCaesar(ciphertext):
 	for testkey in range(0,25):
-		decoded = ''.join(decodeCaesar(testkey, c) for c in ciphertext.upper())
-		print('{0} : Rot{1} Caesar'.format(decoded, testkey))
-		checkMatch(decoded, testkey, 'Caesar')
+		decoded = ''
+		for c in ciphertext.upper():
+			if not c.isalpha():
+				decoded += c
+				continue
+			c = ord(c)
+			decoded += chr(c + testkey if (c + testkey) < 90 else c - testkey)
+		print('{0} : Rot{1} Caesar').format(decoded, str(testkey))
+		checkMatch(decoded, testkey, 'Ceasar')
 	
 def testTrans(self):
 	key = 1
@@ -124,21 +121,17 @@ def testBacon(self):
 		decoded = decoded + bdict.get(self[i*5:i*5+5], ' ')
 	checkMatch(decoded, None, 'Baconarian') # need to fix decoded. no spaces
 	
-def testHex(self):
-	if re.search('(x|\\\\x)[0-9a-fA-F]{2}|\\b[0-9a-fA-F]+\\b', self): # x00 \x00 00 
-		self = self.replace('\\x', '')
-		self = self.replace('x', '')
-	elif re.search('(0x)[0-9a-fA-F]{2}|\\b[0-9a-fA-F]+\\b', self):
-		self = self.replace('0x', '') # 0x00 still needs work
+def testHex(ciphertext):
+	cleancipher = cleanHex(ciphertext)
+	if all(h in string.hexdigits for h in cleancipher):
+		checkMatch(cleancipher.decode('hex'), None, 'Hexadecimal')
 	else:
+		print('Testing Hex: Ciphertext is not hex.')
 		pass
-	print self
-	try:
-		guess = self.decode('hex')
-	except:
-		guess = 'aaaa' # hacky fix like in testB64
-	checkMatch(guess, None, 'Hexadecimal')
-	
+
+def cleanHex(ciphertext):
+	return(ciphertext.replace(' ', '').replace('0x', '').replace(':', '').replace('\\x', '').strip())
+
 def main():
 	try:
 		with open(sys.argv[1], 'r') as ciphertext:
