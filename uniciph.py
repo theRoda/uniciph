@@ -132,7 +132,6 @@ def testHex(ciphertext):
 		checkMatch(cleancipher.decode('hex'), None, 'Hexadecimal')
 	else:
 		print('Testing Hex: Ciphertext is not hex.')
-		pass
 
 def cleanHex(ciphertext):
 	return(ciphertext.replace(' ', '').replace('0x', '').replace(':', '').replace('\\x', '').strip())
