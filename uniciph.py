@@ -15,6 +15,7 @@ import string
 import base64
 import binascii
 import newDetectEnglish
+from Crypto.Util.strxor import strxor
 import cryptomath
 import affineCipher
 
@@ -26,7 +27,7 @@ herpderp = """
 
 def checkMatch(message, key, cipher):
 	message = message.strip()
-	if newDetectEnglish.isEnglish(message):
+	if newDetectEnglish.isEnglish(message, 55, 50):
 		print(herpderp)
 		print('[!] {0} : {1} : Key:{2}'.format(message, cipher, key))
 		sys.exit()
@@ -38,7 +39,7 @@ def testBase64(ciphertext):
 		decoded = base64.decodestring(ciphertext)
 		checkMatch(decoded, None, 'Base64')
 	except binascii.Error:
-		print('Testing Base64: Not Base64')
+		print('{0} : Base64 failed to decode.'.format(ciphertext))
 
 def testReverse(self):
 	decoded = ''
@@ -110,7 +111,21 @@ def testAtbash(self):
 				decoded += AtoM[num]
 		else:
 			decoded += c
+	print('{0} : Atbash'.format(decoded))
 	checkMatch(decoded, None, 'Atbash')
+	
+	
+def testSingleByteXOR(ciphertext):
+	for i in range(0,255):
+		key = format(i, 'x')
+		keytext = ''
+		while len(keytext) < len(ciphertext):
+			keytext += key
+		if all(h in string.hexdigits for h in ciphertext):
+			decoded = strxor(binascii.unhexlify(ciphertext), binascii.unhexlify(keytext))
+			checkMatch(decoded, key, 'Single Byte XOR')
+	print('{0} : Single Byte XOR failed to decode.'.format(ciphertext, key))
+
 
 def testBacon(self):
 	bdict = {}
@@ -148,6 +163,7 @@ def main():
 	testReverse(ctext)
 	testBase64(ctext)
 	testAtbash(ctext)
+	testSingleByteXOR(ctext)
 	#testBacon(ctext) bacon is breaking
 	testCaesar(ctext)
 	testTrans(ctext)
