@@ -11,12 +11,13 @@ Credit to http://inventwithpython.com/hacking for the inspiration and currently 
   * atbash
   * caesar
   * hex
+  * single byte XOR
 * fixing: 
   * baconian
   * affine
   * transposition
 2. next: 
-  * XOR
+  * repeating key XOR
   * railfence
   * bifid
   * columnar transposition
