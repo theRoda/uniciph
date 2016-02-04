@@ -18,6 +18,7 @@ Credit to http://inventwithpython.com/hacking for the inspiration and currently 
   * transposition
 2. next: 
   * repeating key XOR
+  * allow user to specify minimum matching words and letters percentages
   * railfence
   * bifid
   * columnar transposition
