@@ -25,12 +25,12 @@ herpderp = """
 **************************************************
 """
 
+matchlist = []
+
 def checkMatch(message, key, cipher):
 	message = message.strip()
-	if newDetectEnglish.isEnglish(message, 55, 50):
-		print(herpderp)
-		print('[!] {0} : {1} : Key:{2}'.format(message, cipher, key))
-		sys.exit()
+	if newDetectEnglish.isEnglish(message, 50, 50):
+		matchlist.append('[!] {0} : {1} : Key:{2}'.format(message, cipher, key))
 	else:
 		pass
 
@@ -169,7 +169,10 @@ def main():
 	testTrans(ctext)
 	testAffine(ctext)
 	print(herpderp)
-	print('No matches found.')
+	if not matchlist:
+		print('No matches found.')
+	else:
+		print('\n'.join(matchlist))
 
 if __name__ == '__main__':
 	main()
