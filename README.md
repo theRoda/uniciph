@@ -28,7 +28,6 @@ Credit to http://inventwithpython.com/hacking for the inspiration and currently 
   * vigenere
   * keyed vigenere
   * Friedman IC
-  * import ciphertext from multi-line file
   * frequency analysis
   * Cohen's kappa test
   * Chi test
