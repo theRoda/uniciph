@@ -42,12 +42,7 @@ def testBase64(ciphertext):
 		print('{0} : Base64 failed to decode.'.format(ciphertext))
 
 def testReverse(self):
-	decoded = ''
-	i = len(self) - 1
-	while i >= 0:
-		decoded = decoded + self[i]
-		i -= 1
-	print(decoded + ' : Reverse')
+	decoded = ''.join(self[i] for i in reversed(range(len(self) -1)))
 	checkMatch(decoded, None, 'Reverse')
 	
 def decodeCaesar(key, character):
@@ -88,6 +83,7 @@ def testTrans(self):
 		checkMatch(decoded, key, 'Transposition')
 		
 def testAffine(self):
+	self = self.strip()
 	for key in range(len(affineCipher.SYMBOLS) ** 2):
 		keyA = affineCipher.getKeyParts(key)[0]
 		if cryptomath.gcd(keyA, len(affineCipher.SYMBOLS)) != 1:
@@ -150,24 +146,29 @@ def testHex(ciphertext):
 
 def cleanHex(ciphertext):
 	return(ciphertext.replace(' ', '').replace('0x', '').replace(':', '').replace('\\x', '').strip())
+	
+	
+def testCiphertext(ctext):
+	for line in ctext:
+		testHex(line)
+		testReverse(line)
+		testBase64(line)
+		testAtbash(line)
+		testSingleByteXOR(line)
+		#testBacon(line) bacon is breaking
+		testCaesar(line)
+		testTrans(line)
+		testAffine(line)
 
 def main():
 	try:
 		with open(sys.argv[1], 'r') as ciphertext:
-			ctext = ciphertext.read()
-			ctext = ctext.strip()
+			testCiphertext(ciphertext.readlines())
+			#ctext = ctext.strip()
 	except:
 		print('Invalid argument supplied')
 		sys.exit()
-	testHex(ctext)
-	testReverse(ctext)
-	testBase64(ctext)
-	testAtbash(ctext)
-	testSingleByteXOR(ctext)
-	#testBacon(ctext) bacon is breaking
-	testCaesar(ctext)
-	testTrans(ctext)
-	testAffine(ctext)
+	
 	print(herpderp)
 	if not matchlist:
 		print('No matches found.')
