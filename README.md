@@ -1,5 +1,5 @@
 # uniciph
-Universal Cipher Bruteforce Tool
+Universal Cipher Bruteforce and Analysis Tool
 #### warning: project still in alpha.. goofy stuff lies yonder
 Credit to http://inventwithpython.com/hacking for the inspiration and currently a bulk of the code in the support modules.
 <br><br>
