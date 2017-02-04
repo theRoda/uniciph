@@ -1,4 +1,4 @@
-#/bin/bash/python
+#/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Affine Cipher module
 # http://inventwithpython.com/hacking (BSD Licensed)
