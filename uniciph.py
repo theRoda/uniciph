@@ -1,4 +1,4 @@
-#!/bin/python
+#/usr/bin/env python
 # UniCiph - Universal Cipher Cracking Tool
 # theRoda - begin 9/15 
 
